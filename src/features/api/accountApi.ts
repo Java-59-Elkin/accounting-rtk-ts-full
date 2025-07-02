@@ -19,7 +19,7 @@ export const accountApi = createApi({
     endpoints: builder => ({
         registerUser: builder.mutation<UserProfile, UserRegister>({
             query: user => ({
-                url: '/user',
+                url: '/register',
                 method: 'POST',
                 body: user
             })
