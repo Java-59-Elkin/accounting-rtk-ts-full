@@ -34,6 +34,7 @@ export const accountApi = createApi({
             }),
             providesTags: ['profile']
         }),
+        // TODO add {login} to uri
         updateUser: builder.mutation<UserProfile, UserData>({
             query: (user) => ({
                 url: '/user',
