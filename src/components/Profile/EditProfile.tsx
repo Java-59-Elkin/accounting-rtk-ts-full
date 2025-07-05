@@ -6,12 +6,17 @@ interface Props {
 }
 
 const EditProfile = ({close}: Props) => {
+
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [login, setLogin] = useState('');
     const [updateUser] = useUpdateUserMutation();
 
-    const handleClickSave = () => {
-        updateUser({firstName, lastName});
+    const handleClickSave = async () => {
+        await updateUser({
+            user: {
+            firstName,
+            lastName}, login});
         close();
     }
 
@@ -22,25 +27,32 @@ const EditProfile = ({close}: Props) => {
 
     return (
         <>
-            <label>First name:
+            <label>Login:
                 <input
                     type="text"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    value={login}
+                    onChange={(e) => setLogin(e.target.value)}
                 />
             </label>
-            <label>Last name:
-                <input
-                    type="text"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                />
-            </label>
-            <button onClick={handleClickSave}>Save and Close</button>
-            <button onClick={close}>Close without Save</button>
-            <button onClick={handleClickClear}>Clear</button>
-        </>
-    );
-};
+                <label>First name:
+                    <input
+                        type="text"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                    />
+                </label>
+                <label>Last name:
+                    <input
+                        type="text"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                    />
+                </label>
+                <button onClick={handleClickSave}>Save and Close</button>
+                <button onClick={close}>Close without Save</button>
+                <button onClick={handleClickClear}>Clear</button>
+            </>
+            );
+            };
 
-export default EditProfile;
+            export default EditProfile;

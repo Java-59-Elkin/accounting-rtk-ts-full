@@ -35,9 +35,9 @@ export const accountApi = createApi({
             providesTags: ['profile']
         }),
         // TODO add {login} to uri
-        updateUser: builder.mutation<UserProfile, UserData>({
-            query: (user) => ({
-                url: '/user',
+        updateUser: builder.mutation<UserProfile, {user: UserData, login: string}>({
+            query: ({user, login}) => ({
+                url: `/user/${login}`,
                 method: 'PATCH',
                 body: user
             }),
@@ -45,8 +45,8 @@ export const accountApi = createApi({
         }),
         changePassword: builder.mutation<void, { newPassword: string, token: string }>({
             query: ({newPassword, token}) => ({
-                url: '/user/password',
-                method: 'PUT',
+                url: '/password',
+                method: 'PATCH',
                 headers: {
                     'X-Password': newPassword,
                     Authorization: token
